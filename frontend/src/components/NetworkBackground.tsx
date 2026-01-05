@@ -41,8 +41,8 @@ export function NetworkBackground() {
 
                 // Draw particle
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(6, 182, 212, 0.5)'; // Cyan-500 with opacity
+                ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(8, 145, 178, 0.8)'; // Cyan-600 with higher opacity
                 ctx.fill();
 
                 // Connect particles
@@ -58,8 +58,8 @@ export function NetworkBackground() {
                         ctx.lineTo(p2.x, p2.y);
                         // Opacity based on distance
                         const alpha = 1 - dist / connectionDistance;
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${alpha * 0.2})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(8, 145, 178, ${alpha * 0.5})`;
+                        ctx.lineWidth = 1.5;
                         ctx.stroke();
                     }
                 }
@@ -82,7 +82,7 @@ export function NetworkBackground() {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 pointer-events-none z-0 opacity-60"
+            className="fixed inset-0 pointer-events-none z-0 opacity-100"
         />
     );
 }
