@@ -3,21 +3,21 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-slate-900 text-slate-100 font-sans antialiased;
+  @apply bg-slate-50 text-slate-900 font-sans antialiased;
   background-image:
-    radial-gradient(at 0% 0%, hsla(222, 47%, 11%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(220, 70%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(25, 90%, 40%, 1) 0, transparent 50%);
+    radial-gradient(at 0% 0%, hsla(210, 80%, 98%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(200, 50%, 95%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(180, 50%, 95%, 1) 0, transparent 50%);
   min-height: 100vh;
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
+    @apply bg-white/70 backdrop-blur-lg border border-slate-200 shadow-xl;
   }
 
   .glass-card {
-    @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply bg-white/80 backdrop-blur-md border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300;
   }
 }
 

@@ -75,8 +75,8 @@ export function ZscalerTool() {
         <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
             <div className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Zscaler Diagnostics</h1>
-                    <p className="text-slate-400">Advanced ZTNA Telemetry & Health Check</p>
+                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Zscaler Diagnostics</h1>
+                    <p className="text-slate-500">Advanced ZTNA Telemetry & Health Check</p>
                 </div>
                 <button
                     onClick={fetchData}
@@ -97,9 +97,9 @@ export function ZscalerTool() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                     {/* ZDX Score Card */}
-                    <div className="lg:col-span-1 glass-card p-6 rounded-2xl border border-white/10 relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/10 opacity-50"></div>
-                        <h2 className="text-xl font-bold text-white mb-6 relative z-10">ZDX Health Score</h2>
+                    <div className="lg:col-span-1 glass-card p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-50/50 opacity-50"></div>
+                        <h2 className="text-xl font-bold text-slate-900 mb-6 relative z-10">ZDX Health Score</h2>
 
                         <div className="relative flex items-center justify-center py-8">
                             <svg className="w-48 h-48 transform -rotate-90">
@@ -110,7 +110,7 @@ export function ZscalerTool() {
                                     stroke="currentColor"
                                     strokeWidth="12"
                                     fill="transparent"
-                                    className="text-slate-800"
+                                    className="text-slate-200"
                                 />
                                 <circle
                                     cx="96"
@@ -126,15 +126,15 @@ export function ZscalerTool() {
                                 />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span className="text-5xl font-black text-white">{data.zdx.score}</span>
-                                <span className="text-sm text-slate-400 uppercase tracking-widest mt-1">Excellent</span>
+                                <span className="text-5xl font-black text-slate-900">{data.zdx.score}</span>
+                                <span className="text-sm text-slate-500 uppercase tracking-widest mt-1">Excellent</span>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 mt-6 relative z-10">
-                            <div className="bg-slate-900/50 p-3 rounded-lg text-center">
+                            <div className="bg-slate-100 p-3 rounded-lg text-center">
                                 <div className="text-xs text-slate-500 uppercase">Latency</div>
-                                <div className="text-lg font-mono text-white">{data.zdx.latencyMs}ms</div>
+                                <div className="text-lg font-mono text-slate-900">{data.zdx.latencyMs}ms</div>
                             </div>
                             <div className="bg-slate-900/50 p-3 rounded-lg text-center">
                                 <div className="text-xs text-slate-500 uppercase">Jitter</div>
@@ -152,13 +152,13 @@ export function ZscalerTool() {
                     </div>
 
                     {/* Central Tunnel Visual (CSS Based) */}
-                    <div className="lg:col-span-2 glass-card p-0 rounded-2xl border border-white/10 overflow-hidden relative flex flex-col">
-                        <div className="absolute top-0 w-full p-6 z-10 bg-gradient-to-b from-slate-900/80 to-transparent">
-                            <h2 className="text-xl font-bold text-white flex items-center gap-3">
+                    <div className="lg:col-span-2 glass-card p-0 rounded-2xl border border-slate-200 overflow-hidden relative flex flex-col">
+                        <div className="absolute top-0 w-full p-6 z-10 bg-gradient-to-b from-white/90 to-transparent">
+                            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-3">
                                 <span className={`w-3 h-3 rounded-full ${data.info.isZscaler ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
                                 {data.info.isZscaler ? 'Secure Tunnel Active' : 'Tunnel Inactive'}
                             </h2>
-                            <p className="text-sm text-slate-400 mt-1">
+                            <p className="text-sm text-slate-600 mt-1">
                                 Connected to <strong>{data.info.gateway || 'Unknown Gateway'}</strong> via <strong>{data.info.cloud || 'Direct Internet'}</strong>
                             </p>
                             <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
@@ -167,7 +167,7 @@ export function ZscalerTool() {
                             </p>
                         </div>
 
-                        <div className="flex-1 bg-slate-900 relative flex items-center justify-center min-h-[400px]">
+                        <div className="flex-1 bg-slate-50 relative flex items-center justify-center min-h-[400px]">
                             {/* Animated Tunnel Rings */}
                             <div className="relative">
                                 <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full"></div>
@@ -180,7 +180,7 @@ export function ZscalerTool() {
                                     </>
                                 )}
 
-                                <div className="relative w-32 h-32 bg-slate-800 rounded-full border-4 border-slate-700 flex items-center justify-center z-10 shadow-2xl">
+                                <div className="relative w-32 h-32 bg-white rounded-full border-4 border-slate-100 flex items-center justify-center z-10 shadow-xl">
                                     <svg className={`w-16 h-16 ${data.info.isZscaler ? 'text-blue-500' : 'text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                     </svg>
@@ -206,7 +206,7 @@ export function ZscalerTool() {
                     {/* Process Status Grid */}
                     <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {data.processes.map((proc) => (
-                            <div key={proc.name} className="glass-card p-4 rounded-xl border border-white/5 flex items-center justify-between">
+                            <div key={proc.name} className="glass-card p-4 rounded-xl border border-slate-200 flex items-center justify-between">
                                 <div>
                                     <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">{proc.name.replace('.exe', '')}</p>
                                     <p className={`font-mono font-bold ${proc.status === 'Running' ? 'text-green-400' : 'text-red-400'}`}>
@@ -218,7 +218,7 @@ export function ZscalerTool() {
                         ))}
 
                         {/* SSL Inspection Status */}
-                        <div className="glass-card p-4 rounded-xl border border-white/5 flex items-center justify-between col-span-1 md:col-span-2 lg:col-span-1">
+                        <div className="glass-card p-4 rounded-xl border border-slate-200 flex items-center justify-between col-span-1 md:col-span-2 lg:col-span-1">
                             <div>
                                 <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">SSL Inspection</p>
                                 <p className={`font-bold ${data.ssl.inspected ? 'text-blue-400' : 'text-orange-400'}`}>
