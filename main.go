@@ -8,6 +8,7 @@ import (
 	"net-sentry/monitor"
 	"net-sentry/services"
 	"net/http"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -73,5 +74,9 @@ func main() {
 		return c.SendFile("./frontend/dist/index.html")
 	})
 
-	log.Fatal(app.Listen(":8081"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8081"
+	}
+	log.Fatal(app.Listen(":" + port))
 }
