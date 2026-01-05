@@ -1,6 +1,6 @@
 module net-sentry
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/glebarez/sqlite v1.10.0
