@@ -8,8 +8,8 @@ export function Layout() {
             <header className="fixed top-0 w-full z-50 glass border-b-0">
                 <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <img src="/logo.png" alt="Alerzen Logo" className="w-8 h-8 object-contain" />
+                        <div className="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="/logo.png" alt="Alerzen Logo" className="w-14 h-14 object-contain" />
                         </div>
                         <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">
                             Alerzen Networks
