@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"os/exec"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -63,12 +64,28 @@ func CheckMonitor(m models.Monitor) {
 
 	if m.Type == "ICMP" {
 		// Run Ping
-		cmd := exec.Command("ping", "-n", "1", "-w", "2000", m.URL)
+		var args []string
+		if runtime.GOOS == "windows" {
+			args = []string{"-n", "1", "-w", "2000", m.URL}
+		} else {
+			// Linux/Unix (Docker)
+			// -c 1: count 1
+			// -W 2: timeout 2 seconds (note capital W for iputils/busybox sometimes varies, but -W is standard for timeout in seconds on modern ping)
+			// Busybox ping often supports -w (seconds) or -W (seconds).
+			// Standard iputils ping uses -W (timeout in seconds) or -w (deadline).
+			// Let's use -W 2 for timeout.
+			args = []string{"-c", "1", "-W", "2", m.URL}
+		}
+
+		cmd := exec.Command("ping", args...)
 		out, err := cmd.CombinedOutput()
 		duration = time.Since(start).Milliseconds()
 		output = string(out)
 
-		if err == nil && strings.Contains(output, "Reply from") {
+		// Check for success using exit code (err) and broad output matching
+		// Windows: "Reply from"
+		// Linux: "bytes from"
+		if err == nil && (strings.Contains(output, "Reply from") || strings.Contains(output, "bytes from") || strings.Contains(output, " 0% packet loss")) {
 			status = 200 // "UP"
 		} else {
 			status = 0 // "DOWN"

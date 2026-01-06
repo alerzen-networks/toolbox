@@ -2,6 +2,7 @@ package tools
 
 import (
 	"os/exec"
+	"runtime"
 	"strings"
 	"sync"
 )
@@ -34,17 +35,25 @@ func MeasureLatency() []LatencyResult {
 		go func(name, target string) {
 			defer wg.Done()
 
-			// Using system ping. -n 1 (Windows)
-			cmd := exec.Command("ping", "-n", "1", "-w", "1000", target)
+			// Using system ping with OS detection
+			var args []string
+			if runtime.GOOS == "windows" {
+				args = []string{"-n", "1", "-w", "1000", target}
+			} else {
+				args = []string{"-c", "1", "-W", "1", target}
+			}
+
+			cmd := exec.Command("ping", args...)
 			output, err := cmd.CombinedOutput()
 
 			latency := -1
 			if err == nil {
 				// Parse output for "time=XXms"
 				outStr := string(output)
+				// Windows: time=20ms
+				// Linux: time=20.4 ms
 				if strings.Contains(outStr, "time=") || strings.Contains(outStr, "time<") {
-					// Very rough parsing for Windows ping output
-					// "Reply from ... time=23ms ..."
+					// Generalized match logic
 					parts := strings.Split(outStr, "time")
 					if len(parts) > 1 {
 						valPart := parts[1] // "=23ms TTL=..."
